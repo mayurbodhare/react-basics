@@ -1,4 +1,4 @@
-Practicing React in Free Time.
+#Practicing React in Free Time.
 
 day2
 -- differnce between create-react-app and vite
@@ -7,6 +7,7 @@ day2
 -- why vite seems to be fast
 -- how to use vite
 -- naming convention index.js vs main.jsx
+<<<<<<< HEAD
 
 day3
 -- SPA
@@ -17,3 +18,5 @@ day3
     -- Capitalize name
     -- .jsx extension while returning components
 -- Use of ReactDOM
+=======
+>>>>>>> f368deaad3a156f4ac45ce4c65ee607118025619
