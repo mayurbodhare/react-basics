@@ -3,25 +3,30 @@ import {useState, useEffect} from 'react'
 function useCurrencyNames() {
 
     let url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json`;
-    const [names, setNames] = useState([]);
+    const [names, setNames] = useState(new Map());
+    
     useEffect(() => {
-      const fetchData = async () => {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+      const removeEmptyValues = (obj) => {
+        for (const key in obj) {
+            if (obj[key] === '') {
+                delete obj[key];
             }
-            const result = await response.json();
-            const array = Array.from(result);
-            console.log(array);
-            setNames(array);
-        } catch (error) {
-            console.log(error);
         }
-      }
+        return obj;
+    };
 
-      fetchData();
-    }, [])
+    const objectToMap = (obj) => {
+      return new Map(Object.entries(obj));
+    };
+
+      fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const cleanedData = removeEmptyValues({ ...data });
+        const map = objectToMap(cleanedData);
+        setNames(map);
+      })
+    },[]);
     
     return names;
 }

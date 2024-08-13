@@ -1,4 +1,5 @@
 import {useId} from 'react'
+import useCurrencyNames from '../hooks/useCurrencyNames';
 
 function InputBox({
   label,
@@ -9,10 +10,10 @@ function InputBox({
   selectCurrency = "usd",
   amountDisable = false,
   currencyDisable = false,
-  className = "",
+  className = "", 
 }) {
   const amountInputId = useId();
-
+  const names = useCurrencyNames();  
   return (
     <div className={`bg-white p-3 rounded-lg text-sm flex  ${className}`}>
       <div className="w-1/2">
@@ -41,8 +42,9 @@ function InputBox({
           disabled={currencyDisable}
         >
           {currencyOptions.map((currency) => (
+            names.get(currency) &&
             <option key={currency} value={currency}>
-              {currency}
+              {names.get(currency)}
             </option>
           ))}
         </select>
